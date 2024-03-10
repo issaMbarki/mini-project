@@ -1,46 +1,51 @@
-{% extends 'base.html' %}
-{% block head %}
-   <title>Miniteur</title>
-{% endblock %}
-{% block body %}
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="row border rounded-5 p-3 bg-white shadow box-area">
-    <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #103cbe;">
-        <div class="featured-image mb-3">
-         <img src="../static/images/sport.jpg" class="img-fluid sport" style="width: 250px;">
-        </div>
-        <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600;">Prêt, feu, partez!</p>
-        <small class="text-white text-wrap text-center" style="width: 17rem;font-family: 'Courier New', Courier, monospace;">Un pas de plus vers vos objectifs!.</small>
-    </div> 
+{% extends 'base.html' %} {% block head %}
+<title>Miniteur</title>
+{% endblock %} {% block body %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="row border rounded-5 p-3 bg-white shadow box-area">
+    <div class="col-md-6 rounded-4 d-none d-md-flex justify-content-center align-items-center flex-column left-box h-100"
+      style="background: #103cbe">
+      <div class="featured-image mb-3">
+        <img src="../static/images/sport.jpg" class="img-fluid sport" style="width: 250px" />
+      </div>
+      <p class="text-white fs-2" style="font-family: 'Courier New', Courier, monospace; font-weight: 600; white-space: nowrap;">
+        Prêt, feu, partez!
+      </p>
+      <small class="text-white text-wrap text-center"
+        style="width: 17rem; font-family: 'Courier New', Courier, monospace">Un pas de plus vers vos objectifs!.</small>
+    </div>
     <div class="col-md-6 right-box">
-       <div class="row align-items-center">
-             <div class="header-text mb-4">
-                  <h2>Configurer Votre Entraînement</h2>
-             </div>
-             <div class="input-group mb-3">
-                 <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Nombre de séries ">
-             </div>
-             <div class="input-group mb-3">
-                 <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Nombre d'exercices par série">
-             </div>
-             <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Temps de travail par exercice (s)">
-            </div>
-            <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Temps de repos entre exercices (s)">
-            </div>
-            <div class="input-group mb-3">
-                <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Temps de repos entre séries (s)">
-            </div>
-             
-             <div class="input-group mb-3">
-                 <button class="btn btn-lg btn-primary w-100 fs-6 demarer">Démarer</button>
-             </div>
-             
-             
-       </div>
-    </div> 
+      <div class="row align-items-center">
+        <div class="header-text mb-4">
+          <h2>Configurer Votre Entraînement</h2>
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control form-control-lg bg-light fs-6" placeholder="Nombre de séries " />
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control form-control-lg bg-light fs-6"
+            placeholder="Nombre d'exercices par série" />
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control form-control-lg bg-light fs-6"
+            placeholder="Temps de travail par exercice (s)" />
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control form-control-lg bg-light fs-6"
+            placeholder="Temps de repos entre exercices (s)" />
+        </div>
+        <div class="input-group mb-3">
+          <input type="number" class="form-control form-control-lg bg-light fs-6"
+            placeholder="Temps de repos entre séries (s)" />
+        </div>
 
-   </div>
- </div>
+        <div class="input-group mb-3">
+          <button class="btn btn-lg btn-primary w-100 fs-6 demarer">
+            Démarer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

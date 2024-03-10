@@ -31,16 +31,20 @@ body{
 
      .box-area{
         margin: 0 10px;
-
-     }
-     .left-box{
+        
+    }
+    .left-box{
         height: 100px;
         overflow: hidden;
      }
      .right-box{
         padding: 20px;
      }
-
+     div.input-group {
+    
+        width: 100% !important;
+        margin-left: 0;
+    }
 }
 .input-group {
     
@@ -50,7 +54,7 @@ body{
 .h2, h2 {
     font-size: 2rem;
     margin-left: 8PX;
-}
+} 
 .demarer{
     margin-top: 18px;
 }
