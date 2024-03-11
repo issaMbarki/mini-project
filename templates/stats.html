@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+<!-- head block -->
+{% block head %}
+<title>Stats</title>
+{% endblock %}
+
+<!-- body block -->
+{% block body %}
+<div class="container">
+    <h1>Statistiques</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Image -->
+            <img src="{{ url_for('static', filename='images/sport.jpg') }}" class="img-fluid" alt="Stats Image" />
+        </div>
+        <div class="col-md-8">
+            <!-- Statistics -->
+            <div class="row">
+                <div class="col-md-12 d-flex gap-4 justify-content-between">
+                    <p>
+                        Nombre de séries :
+                        <span id="nombre_series" data-value="{{ nombre_series }}">{{ nombre_series }}</span>
+                    </p>
+                    <div class="progress w-50" role="progressbar" aria-label="Basic example" aria-valuenow="0"
+                        aria-valuemin="50" aria-valuemax="100" style="height: 25px;">
+                        <div class="progress-bar" style="width: 50%">1/2</div>
+                    </div>
+                </div>
+                <div class="col-md-12 d-flex gap-4 justify-content-between">
+                    <p>
+                        Nombre d'exercices :
+                        <span id="nombre_exercices" data-value="{{ nombre_exercices }}">{{ nombre_exercices }}</span>
+                    </p>
+                    <div class="progress w-50" role="progressbar" aria-label="Basic example" aria-valuenow="0"
+                        aria-valuemin="50" aria-valuemax="100" style="height: 25px;">
+                        <div class="progress-bar" style="width: 50%">1/2</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        Temps de travail :
+                        <span id="temps_travail" data-value="{{ temps_travail }}">{{ temps_travail }}</span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        Temps de repos entre les exercices :
+                        <span id="temps_repos_exercices" data-value="{{ temps_repos_exercices }}">{{ temps_repos_exercices }}</span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        Temps de repos entre les séries :
+                        <span id="temps_repos_series" data-value="{{ temps_repos_series }}">{{ temps_repos_series }}</span>
+                    </p>
+                </div>
+                <!-- Buttons -->
+                <div class="col-md-12">
+                    <button class="btn btn-primary" id="pauseBtn">Pause</button>
+                    <button class="btn btn-secondary" id="homeBtn">Back Home</button>
+                    <button class="btn btn-danger" id="restartBtn">Restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{url_for('static',filename='js/stats.js')}}"></script>
+{% endblock %}
