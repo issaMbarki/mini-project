@@ -13,8 +13,8 @@ def handle_form_data(form_data):
             )
 
         # the duration of each exercise (in seconds)
-        temps_travail = int(form_data.get("temps_travail"))
-        if temps_travail < 1:
+        temps_travail_par_exercice = int(form_data.get("temps_travail_par_exercice"))
+        if temps_travail_par_exercice < 1:
             raise ValueError("La durée de chaque exercice doit être un entier positif.")
 
         # the rest time between exercises (in seconds)
@@ -33,7 +33,7 @@ def handle_form_data(form_data):
         return (
             nombre_series,
             nombre_exercices,
-            temps_travail,
+            temps_travail_par_exercice,
             temps_repos_exercices,
             temps_repos_series,
         )

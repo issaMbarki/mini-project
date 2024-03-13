@@ -40,24 +40,35 @@
                 <div class="col-md-6">
                     <p>
                         Temps de travail :
-                        <span id="temps_travail" data-value="{{ temps_travail }}">{{ temps_travail }}</span>
+                        <span id="temps_travail_par_exercice" data-value="{{ temps_travail_par_exercice }}">{{
+                            temps_travail_par_exercice }}</span>
                     </p>
                 </div>
                 <div class="col-md-6">
                     <p>
                         Temps de repos entre les exercices :
-                        <span id="temps_repos_exercices" data-value="{{ temps_repos_exercices }}">{{ temps_repos_exercices }}</span>
+                        <span id="temps_repos_exercices" data-value="{{ temps_repos_exercices }}">{{
+                            temps_repos_exercices }}</span>
                     </p>
                 </div>
                 <div class="col-md-6">
                     <p>
                         Temps de repos entre les séries :
-                        <span id="temps_repos_series" data-value="{{ temps_repos_series }}">{{ temps_repos_series }}</span>
+                        <span id="temps_repos_series" data-value="{{ temps_repos_series }}">{{ temps_repos_series
+                            }}</span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        Temps restant :
+                        <span id="temps_restant">{{ (
+                            (temps_travail_par_exercice + temps_repos_exercices) * nombre_exercices
+                            ) * nombre_series + (nombre_series - 1) * temps_repos_series }}</span>
                     </p>
                 </div>
                 <!-- Buttons -->
                 <div class="col-md-12">
-                    <button class="btn btn-primary" id="pauseBtn">Pause</button>
+                    <button class="btn btn-primary" id="pause_resume_btn">Pause</button>
                     <button class="btn btn-secondary" id="homeBtn">Back Home</button>
                     <button class="btn btn-danger" id="restartBtn">Restart</button>
                 </div>
