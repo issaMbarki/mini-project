@@ -58,19 +58,9 @@ class Timer:
         return temps_total_toutes_series
 
     # Function to update the timer
-    def update_timer(self, from_resume_exercice=False):
+    def update_timer(self):
         # Track the time spent working on an exercise
-        print(from_resume_exercice)
         while self.is_running and self.remaining_time > 0:
-            print("remaining_time =", self.remaining_time)
-            print("current_serie =", self.current_serie)
-            print("current_exercise =", self.current_exercise)
-            print("worked_time =", self.worked_time)
-            print("exercise_break_countdown =", self.exercise_break_countdown)
-            print("serie_break_countdown =", self.serie_break_countdown)
-            print("is_in_exercise_break =", self.is_in_exercise_break)
-            print("is_in_serie_break =", self.is_in_serie_break)
-            print("=====================", "\n\n")
             time.sleep(1)
             self.remaining_time -= 1
             self.worked_time += 1
@@ -205,9 +195,7 @@ def stop_timer():
             return jsonify(paused=True)
         else:
             timer.is_running = True
-            timer.timer_thread = threading.Thread(
-                target=timer.update_timer, args=[True]
-            )
+            timer.timer_thread = threading.Thread(target=timer.update_timer)
             timer.timer_thread.start()
             return jsonify(paused=False)
 
