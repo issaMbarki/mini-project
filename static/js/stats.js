@@ -32,7 +32,7 @@ function updateTimerInfo() {
     })
     .then((data) => {
       const jsonData = JSON.parse(data); // Convert data to JSON
-      console.log(jsonData);
+      // console.log(jsonData);
       const {
         current_exercise,
         current_serie,
