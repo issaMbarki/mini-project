@@ -1,33 +1,25 @@
-// Accessing the values using data attributes
-const nombre_series = document
-  .getElementById("nombre_series")
-  .getAttribute("data-value");
-const nombre_exercices = document
-  .getElementById("nombre_exercices")
-  .getAttribute("data-value");
+const nombre_series = document.getElementById("Nbs").getAttribute("value");
+const nombre_exercices = document.getElementById("NbE").getAttribute("value");
 const temps_travail_par_exercice = document
-  .getElementById("temps_travail_par_exercice")
-  .getAttribute("data-value");
+  .getElementById("TT")
+  .getAttribute("value");
 const temps_repos_exercices = document
-  .getElementById("temps_repos_exercices")
-  .getAttribute("data-value");
-const temps_repos_series = document
-  .getElementById("temps_repos_series")
-  .getAttribute("data-value");
+  .getElementById("Tr")
+  .getAttribute("value");
+const temps_repos_series = document.getElementById("Trs").getAttribute("value");
 
-// console.log(
-// 	nombre_series,
-// 	nombre_exercices,
-// 	temps_travail_par_exercice,
-// 	temps_repos_exercices,
-// 	temps_repos_series
-// );
 let intervalId;
-const temps_restant_span = document.getElementById("temps_restant");
-const nb_series_div = document.getElementById("nb_series");
-const nb_exercices_div = document.getElementById("nb_exercices");
-const nextEventLabel = document.getElementById("nextEventLabel");
+const nb_series_input = document.getElementById("NbsInput");
+const nb_exercices_input = document.getElementById("NbEInput");
 const work_pause_countdown = document.getElementById("work_pause_countdown");
+const temps_restant_hms = document
+  .querySelector(".TR .inHms")
+  .querySelectorAll("input");
+const nextEvent_hms = document
+  .querySelector(".PE .inHms")
+  .querySelectorAll("input");
+const nextEvent_label = document.querySelector(".PE label");
+let is_working = true;
 function updateTimerInfo() {
   fetch("/get_timer_info", {
     method: "POST",
@@ -50,26 +42,32 @@ function updateTimerInfo() {
         remaining_time,
         serie_break_countdown,
         worked_time,
+        is_finished,
       } = jsonData;
-      temps_restant_span.innerText = remaining_time+"s";
 
+      updateTime(temps_restant_hms, remaining_time);
+      updateCurrentNumber(nb_series_input, current_serie);
+      updateCurrentNumber(nb_exercices_input, current_exercise);
       if (!(is_in_exercise_break || is_in_serie_break)) {
-        nextEventLabel.innerText = `worked time: ${worked_time}s`;
+        nextEvent_label.innerText = `temps travaillé :`;
+        updateTime(nextEvent_hms, worked_time);
       }
-      if (is_in_exercise_break ) {
-        nextEventLabel.innerText = `next exercice in: ${exercise_break_countdown}s`;
+      if (is_in_exercise_break) {
+        nextEvent_label.innerText = `Prochain exercice : `;
+        updateTime(nextEvent_hms, exercise_break_countdown);
       }
       if (is_in_serie_break) {
-        nextEventLabel.innerText = `next exercice in: ${serie_break_countdown}s`;
+        nextEvent_label.innerText = `Prochain exercice : `;
+        updateTime(nextEvent_hms, serie_break_countdown);
       }
-      //for number of exercices
-      updateProgressBar(nb_exercices_div, current_exercise, nombre_exercices);
-
-      //for number of series
-      updateProgressBar(nb_series_div, current_serie, nombre_series);
-
-      if (remaining_time <= 0) {
+      if (is_finished) {
+        is_working = false;
+        updateCurrentNumber(nb_series_input, nombre_series);
+        updateCurrentNumber(nb_exercices_input, nombre_exercices);
+        updateTime(nextEvent_hms, 0);
         clearInterval(intervalId);
+      }
+      if (remaining_time <= 0) {
       }
     })
     .catch((error) => {
@@ -79,11 +77,15 @@ function updateTimerInfo() {
       }
     });
 }
-updateTimerInfo()
+updateTimerInfo();
 intervalId = setInterval(updateTimerInfo, 1000);
 const togle_pause_btn = document.getElementById("pause_resume_btn");
+const home_btn = document.getElementById("home_btn");
+const reset_btn = document.getElementById("reset_btn");
 togle_pause_btn?.addEventListener("click", () => {
-  console.log("clicked");
+  if (!is_working) {
+    return;
+  }
   fetch("/stop_resume_timer", {
     method: "POST",
   })
@@ -97,9 +99,9 @@ togle_pause_btn?.addEventListener("click", () => {
       const jsonData = JSON.parse(data); // Convert data to JSON
       if (jsonData.paused) {
         clearInterval(intervalId);
-        togle_pause_btn.innerText = "Continue";
+        togle_pause_btn.value = "Continue";
       } else {
-        togle_pause_btn.innerText = "Pause";
+        togle_pause_btn.value = "Pause";
         updateTimerInfo();
         intervalId = setInterval(updateTimerInfo, 1000);
       }
@@ -108,9 +110,28 @@ togle_pause_btn?.addEventListener("click", () => {
       console.error("Error:", error);
     });
 });
+reset_btn.addEventListener("click", () => {
+  location.reload()
+});
+function updateTime(hmsArr, seconds) {
+  timeInHrs = convertTime(seconds);
+  hmsArr.forEach((input, index) => {
+    input.value = timeInHrs[index];
+  });
+}
 
-function updateProgressBar(divElement, currentData, totalData) {
-  divElement.classList.toggle("text-dark", currentData === 1);
-  divElement.innerText = `${currentData - 1}/${totalData}`;
-  divElement.style.width = `${(100 * (currentData - 1)) / totalData}%`;
+function convertTime(seconds) {
+  const hours = Math.floor(seconds / 3600)
+    .toString()
+    .padStart(2, "0");
+  const minutes = Math.floor((seconds % 3600) / 60)
+    .toString()
+    .padStart(2, "0");
+  const remainingSeconds = (seconds % 60).toString().padStart(2, "0");
+
+  return [hours, minutes, remainingSeconds];
+}
+
+function updateCurrentNumber(element, currentData) {
+  element.value = currentData;
 }

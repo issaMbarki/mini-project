@@ -52,8 +52,13 @@ body{
     margin-left: 46px;
 }
 .h2, h2 {
-    font-size: 2rem;
     margin-left: 8PX;
+    
+    color: #0066A9;
+    font-size: 38px;
+    position: relative;
+    margin-top: 28PX;
+    text-shadow: 0px 0px 2px  #386591;
 } 
 .demarer{
     margin-top: 18px;

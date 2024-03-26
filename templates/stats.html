@@ -1,91 +1,76 @@
 {% extends 'base.html' %}
 
-<!-- head block -->
 {% block head %}
-<title>Stats</title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/stats.css')}}">
 {% endblock %}
 
-<!-- body block -->
 {% block body %}
 <div class="container">
-    <h1>Statistiques</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <!-- Image -->
-            <img src="{{ url_for('static', filename='images/sport.jpg') }}" class="img-fluid" alt="Stats Image" />
-        </div>
-        <div class="col-md-8">
-            <!-- Statistics -->
-            <div class="row">
-                <div class="col-md-12 d-flex gap-4 justify-content-between">
-                    <p>
-                        Nombre de séries :
-                        <span id="nombre_series" data-value="{{ nombre_series }}">{{ nombre_series }}</span>
-                    </p>
-                    <div class="progress w-50" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                        aria-valuemin="50" aria-valuemax="100" style="height: 25px;">
-                        <div id="nb_series" class="progress-bar text-dark overflow-visible" style="width: 0%">0/{{
-                            nombre_series }}</div>
+    <div class="main">
+        <input type="checkbox" id="chk" aria-hidden="true">
+
+        <div class="MiniteurP">
+            <form class="form" action="/" method="post">
+                <label for="chk" aria-hidden="true" class="Mint">Miniteur</label>
+                <label for="NbS" class="NbS">Numero de Série : </label>
+                <input type="text" name="NbS" id="NbsInput" class="input" autocomplete="off" readonly>
+                <label for="NbE" class="NbE">Numero d'exercice : </label>
+                <input type="text" name="NbE" id="NbEInput" class="input" autocomplete="off" readonly>
+                <div class="TR">
+                    <label for="Tr" class="Tr">Temps restant : </label>
+                    <div class="inHms">
+                        <input type="text" value="00" readonly id="Tr" class="input">
+                        <span class="Hms">H</span>
+                        <input type="text" value="13" readonly id="Tr" class="input">
+                        <span class="Hms">Min</span>
+                        <input type="text" value="08" readonly id="Tr" class="input">
+                        <span class="Hms">S</span>
                     </div>
                 </div>
-                <div class="col-md-12 d-flex gap-4 justify-content-between">
-                    <p>
-                        Nombre d'exercices :
-                        <span id="nombre_exercices" data-value="{{ nombre_exercices }}">{{ nombre_exercices }}</span>
-                    </p>
-                    <div class="progress w-50" role="progressbar" aria-label="Basic example" aria-valuenow="0"
-                        aria-valuemin="50" aria-valuemax="100" style="height: 25px;">
-                        <div id="nb_exercices" class="progress-bar text-dark overflow-visible" style="width: 0%">
-                            0/{{nombre_exercices}}</div>
+                <div class="PE">
+                    <label for="Pe" class="Pe">Prochain exercice : </label>
+                    <div class="inHms">
+                        <input type="text" value="00" readonly id="Pe" class="input">
+                        <span class="Hms">H</span>
+                        <input type="text" value="13" readonly id="Pe" class="input">
+                        <span class="Hms">Min</span>
+                        <input type="text" value="08" readonly id="Pe" class="input">
+                        <span class="Hms">S</span>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <p>
-                        Temps restant :
-                        <span id="temps_restant">{{ (
-                            (temps_travail_par_exercice + temps_repos_exercices) * nombre_exercices
-                            ) * nombre_series + (nombre_series - 1) * temps_repos_series }}</span>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        <span id="nextEventLabel">
-                            worked time: 0s
-                        </span>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        Temps de travail :
-                        <span id="temps_travail_par_exercice" data-value="{{ temps_travail_par_exercice }}">{{
-                            temps_travail_par_exercice }}s</span>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        Temps de repos entre les exercices :
-                        <span id="temps_repos_exercices" data-value="{{ temps_repos_exercices }}">{{
-                            temps_repos_exercices }}s</span>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        Temps de repos entre les séries :
-                        <span id="temps_repos_series" data-value="{{ temps_repos_series }}">{{ temps_repos_series
-                            }}s</span>
-                    </p>
+                <div class="boutton">
+                    <input type="button" value="Pause" class="btn" id="pause_resume_btn">
+                    <input type="button" value="Reset" class="btn" id="reset_btn">
+                    <input type="submit" value="Back home" class="btn">
                 </div>
 
-                <!-- Buttons -->
-                <div class="col-md-12">
-                    <button class="btn btn-primary" id="pause_resume_btn">Pause</button>
-                    <button class="btn btn-secondary" id="homeBtn">Back Home</button>
-                    <button class="btn btn-danger" id="restartBtn">Restart</button>
-                </div>
+
+            </form>
+        </div>
+        <div class="MinD">
+            <label for="chk" aria-hidden="true" class="Donnees">Donnees</label>
+            <div class="frmD">
+                <form class="form">
+                    <label for="NbSD" class="NbSD">Nombre de Séries : </label>
+                    <input type="text" name="NbS" id="Nbs" class="input" autocomplete="off" value="{{ nombre_series }}"
+                        readonly>
+                    <label for="NbED" class="NbED">Numero d'exercice : </label>
+                    <input type="text" name="NbE" id="NbE" class="input" autocomplete="off"
+                        value="{{ nombre_exercices }}" readonly>
+                    <label for="TTD" class="TTD">Temps de travail : (en s)</label>
+                    <input type="text" name="TT" id="TT" class="input" autocomplete="off"
+                        value="{{temps_travail_par_exercice }}" readonly>
+                    <label for="TrD" class="TrD">Temps de repos entre exercice : (en s)</label>
+                    <input type="text" name="Tr" id="Tr" class="input" autocomplete="off"
+                        value="{{temps_repos_exercices }}" readonly>
+                    <label for="TrsD" class="TrsD">Temps de repos entre série : (en s)</label>
+                    <input type="text" name="Trs" id="Trs" class="input" autocomplete="off"
+                        value="{{ temps_repos_series }}" readonly>
+                    <input type="text" class="hd">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
 <script src="{{url_for('static',filename='js/stats.js')}}"></script>
 {% endblock %}

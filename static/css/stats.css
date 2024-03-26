@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color:#FFFFFF;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+.main{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #103CBE;
+    max-height: 600px;
+    width: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #103CBE;
+    font-family: 'Poppins',sans-serif;
+}
+.form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0px;
+    padding: 24px;
+}
+#chk{
+    display: none;
+}
+.MiniteurP{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.MiniteurP label{
+    margin: 0% 1px 4%
+}
+label{
+    color: white;
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+.input{
+    width: 100px;
+    height: 25px;
+    background: #e0dede;
+    padding: 10Px;
+    border: none;
+    outline: none;
+    border: 4px;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 17px;
+    margin-top: 5px;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+
+}
+.MinD{
+    background-color: #eee;
+    border-radius: 69% / 17%;
+    transform: translateY(5%);
+    transition: .8s ease-in-out;
+}
+.MinD label{
+    color: #103CBE;
+    transform: scale(.6);
+}
+#chk:checked ~ .MinD {
+    transform: translateY(-60%);
+}
+ 
+#chk:checked ~ .MinD label {
+    transform: scale(1);
+    margin: 14% 0 5%;
+}
+
+#chk:checked ~ .MiniteurP label {
+    transform: scale(.6);
+    margin: 5% 0 5%;
+}
+
+/*.form .btn{
+    width: 40px;
+    height: 15px;
+    margin: 0px auto 10%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
+}*/
+.boutton{
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+}
+.boutton input
+{
+    width: 94px;
+    height: 34px;
+    color: #103CBE;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
+    margin-top: 18px;
+    background-color: #e0dede;
+}
+label.Mint,
+label.Donnees{
+    font-size: 30px;
+    margin-bottom: 32px;
+}
+.btn{
+    white-space: nowrap;
+}
+
+.NbSD ,.NbED,
+.TTD,.TrD,.TrsD{
+    margin-top: -10px !important;
+}
+.hd{
+    visibility: hidden;
+   margin-top: 369px;
+}
