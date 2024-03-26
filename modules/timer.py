@@ -1,6 +1,5 @@
 import time
-from playsound import playsound
-
+from modules.utils import playSound
 
 class Timer:
     def __init__(
@@ -49,7 +48,7 @@ class Timer:
     # Method to update the timer
     def update_timer(self):
         if self.remaining_time == self.temps_total:
-            playsound("./static/sounds/your_workout_starts_now.wav")
+            playSound("./static/sounds/your_workout_starts_now.wav")
         # Track the time spent working on an exercise
         while self.is_running and self.remaining_time > 0:
             # those two conditions for when the user press on resume button
@@ -64,10 +63,10 @@ class Timer:
             if self.worked_time == self.temps_travail_par_exercice:
                 self.worked_time = 0  # Reset the worked_time when switching between exercises or series
                 if self.current_exercise < self.nombre_exercices:
-                    playsound("./static/sounds/exercise_break_starts.wav")
+                    playSound("./static/sounds/exercise_break_starts.wav")
                     self.switch_to_exercise_break()
                 else:
-                    playsound("./static/sounds/series_break_starts.wav")
+                    playSound("./static/sounds/series_break_starts.wav")
                     self.switch_to_series_break()
 
 
@@ -76,7 +75,7 @@ class Timer:
             self.worked_time += 1
             # If the remaining time reaches 0, stop the timer
             if self.remaining_time == 0:
-                playsound("./static/sounds/you_finished_your_workout.wav")
+                playSound("./static/sounds/you_finished_your_workout.wav")
                 self.is_running = False
                 self.is_finished = True
 
@@ -95,7 +94,7 @@ class Timer:
 
         # to make sure he finished  his break before going back to work
         if self.exercise_break_countdown == 0:
-            playsound("./static/sounds/new_exercise_starts.wav")
+            playSound("./static/sounds/new_exercise_starts.wav")
             self.exercise_break_countdown = self.temps_repos_exercices
             self.is_in_exercise_break = False
 
@@ -116,6 +115,6 @@ class Timer:
 
         # to make sure he finished  his break before going back to work
         if self.serie_break_countdown == 0:
-            playsound("./static/sounds/new_series_start.wav")
+            playSound("./static/sounds/new_series_start.wav")
             self.serie_break_countdown = self.temps_repos_series
             self.is_in_serie_break = False
