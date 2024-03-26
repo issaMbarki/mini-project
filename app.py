@@ -8,8 +8,8 @@ from playsound import playsound
 app = Flask(__name__)
 
 # Disable the default Flask logger
-log = logging.getLogger("werkzeug")
-log.setLevel(logging.ERROR)
+# log = logging.getLogger("werkzeug")
+# log.setLevel(logging.ERROR)
 
 timer=None
 
@@ -84,11 +84,6 @@ def stop_timer():
             timer.timer_thread.start()
             return jsonify(paused=False)
 
-
-# @app.route('/test')
-# def play_sound():
-#     playsound('./static/sounds/sound.mp3')
-#     return 'Sound played!'
 
 
 if __name__ == "__main__":
