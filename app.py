@@ -15,7 +15,6 @@ timer=None
 
 @app.route("/",methods=["POST","GET"])
 def index():
-    print('horyaaa')
     return render_template("index.html")
 
 @app.route("/stats", methods=["POST"])

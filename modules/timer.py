@@ -52,7 +52,6 @@ class Timer:
             playsound("./static/sounds/your_workout_starts_now.wav")
         # Track the time spent working on an exercise
         while self.is_running and self.remaining_time > 0:
-            print("remaining time: ", self.remaining_time)
             # those two conditions for when the user press on resume button
             # added because if he was in break time and he toggle pause/resume then the programm will exit the function without finishing the break time (serie_break_countdown,serie_break_countdown)
             # 7ydihom w fach tkoni f repos diri pause, tsnay wahd 2s, diri resume, aybalk probleme
